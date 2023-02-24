@@ -28,7 +28,7 @@ public class IngredientsServiceslmpl implements IngredientsServices{
 
             return ingredientMap.put(id, ingredient);
         }
-        return null;
+       throw new RuntimeException ("Ингредиент для замены не найден");
     }
 
 

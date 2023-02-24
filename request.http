@@ -6,7 +6,7 @@ POST http://localhost:8080/recipe
 Content-Type: application/json
 
 {
-  "name": "Сырники из творога",
+  "name": "Сырники из творога ",
   "ingredients": [
     {
       "name": "Творог ",
@@ -47,3 +47,5 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:8080/recipe/0
+###
+PUT http://localhost:8080/recipe/0
