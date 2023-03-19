@@ -14,5 +14,7 @@ public interface IngredientsServices {
     List<Ingredient> getAll();
 
     byte[] getAllInBytes();
-    void importRecipes(MultipartFile ingredient);
+
+
+    void importIngredients(MultipartFile ingredients);
 }

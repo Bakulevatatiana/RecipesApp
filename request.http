@@ -45,6 +45,7 @@ Content-Type: application/json
     "6.Повторяйте, пока творог не закончится. "
     ]
 }
+
 ###
 POST http://localhost:8080/ingredients
 Content-Type: application/json
@@ -93,6 +94,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/recipe/0
+
 ###
 PUT http://localhost:8080/recipe/0
 Content-Type: application/json
@@ -142,6 +144,28 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/recipe/download
+
 ###
 GET http://localhost:8080/ingredients/download
 
+###
+POST http://localhost:8080/recipe/import
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="recipes"; filename="importRecipes.json"
+Content-Type: application/json
+
+< ./importRecipes.json
+--WebAppBoundary--
+
+###
+POST http://localhost:8080/ingredients/import
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="ingredients"; filename="importIngredients.json"
+Content-Type: application/json
+
+< ./importIngredients.json
+--WebAppBoundary--

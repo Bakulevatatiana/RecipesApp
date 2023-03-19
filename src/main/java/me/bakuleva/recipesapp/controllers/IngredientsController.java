@@ -65,8 +65,13 @@ public class IngredientsController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .contentLength(bytes.length)
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"recipes.json\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"ingredients.json\"")
                 .body(bytes);
+
+    }
+    @PostMapping(value = "import",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void importIngredients(MultipartFile ingredients){
+        ingredientsServices.importIngredients(ingredients);
 
     }
 

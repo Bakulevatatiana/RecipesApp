@@ -110,18 +110,18 @@ public class IngredientsServiceslmpl implements IngredientsServices{
         return null;
     }
 
+
     @Override
-    public void importRecipes(MultipartFile ingredient) {
+    public void importIngredients(MultipartFile ingredients) {
         try {
-            Map<Long, Ingredient> mapFromRequest = objectMapper.readValue(ingredient.getBytes(), new TypeReference<>() {
+            Map<Long, Ingredient> mapFromRequest = objectMapper.readValue(ingredients.getBytes(), new TypeReference<>() {
             });
             writeDataToFile(mapFromRequest);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-    }
+}
 
 
 
