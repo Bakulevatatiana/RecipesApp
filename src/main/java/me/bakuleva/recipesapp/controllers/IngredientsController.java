@@ -5,8 +5,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import me.bakuleva.recipesapp.model.Ingredient;
 import me.bakuleva.recipesapp.services.IngredientsServices;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -53,5 +56,19 @@ public class IngredientsController {
     public Ingredient deleteIngredient(@PathVariable("id") long id){
         return ingredientsServices.remove(id);
     }
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadRecipes(){
+        byte[] bytes=ingredientsServices.getAllInBytes();
+        if (bytes==null){
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentLength(bytes.length)
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"recipes.json\"")
+                .body(bytes);
+
+    }
+
 
 }

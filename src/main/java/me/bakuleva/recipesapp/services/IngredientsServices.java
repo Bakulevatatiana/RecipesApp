@@ -1,6 +1,7 @@
 package me.bakuleva.recipesapp.services;
 
 import me.bakuleva.recipesapp.model.Ingredient;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,4 +12,7 @@ public interface IngredientsServices {
     Ingredient remove( long id);
 
     List<Ingredient> getAll();
+
+    byte[] getAllInBytes();
+    void importRecipes(MultipartFile ingredient);
 }

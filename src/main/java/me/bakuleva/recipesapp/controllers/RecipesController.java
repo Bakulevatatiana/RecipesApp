@@ -6,8 +6,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import me.bakuleva.recipesapp.model.Recipe;
 import me.bakuleva.recipesapp.services.RecipesServices;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import java.util.List;
@@ -52,4 +55,26 @@ public class RecipesController {
     public Recipe deleteRecipe(@PathVariable("id") long id){
         return recipesServices.remove(id);
     }
+
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> downloadRecipes(){
+        byte[] bytes=recipesServices.getAllInBytes();
+        if (bytes==null){
+            return ResponseEntity.internalServerError().build();
+        }
+       return ResponseEntity.ok()
+               .contentType(MediaType.APPLICATION_JSON)
+               .contentLength(bytes.length)
+               .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"recipes.json\"")
+               .body(bytes);
+
+    }
+    @PostMapping(value = "import",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void importRecipes(MultipartFile recipes){
+       recipesServices.importRecipes(recipes);
+
+    }
+
 }
+
+
