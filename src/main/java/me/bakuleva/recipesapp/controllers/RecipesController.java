@@ -74,7 +74,19 @@ public class RecipesController {
        recipesServices.importRecipes(recipes);
 
     }
+    @GetMapping( "/export")
+public ResponseEntity<byte[]> exportTxt(){
+    byte[] bytes=recipesServices.exportTxt();
+        if (bytes==null){
+        return ResponseEntity.internalServerError().build();
+    }
+       return ResponseEntity.ok()
+               .contentType(MediaType.TEXT_PLAIN)
+               .contentLength(bytes.length)
+               .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=\"info.txt\"")
+               .body(bytes);
 
+}
 }
 
 

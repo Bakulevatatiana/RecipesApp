@@ -12,6 +12,12 @@ public class Ingredient {
     public Ingredient() {
 
     }
+
+    @Override
+    public String toString() {
+        return  name + " - " + weight +
+                " " + measureUnit ;
+    }
 }
 
 

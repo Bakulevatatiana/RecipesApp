@@ -2,6 +2,7 @@ package me.bakuleva.recipesapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import me.bakuleva.recipesapp.controllers.exeption.InvalidtException;
 import me.bakuleva.recipesapp.model.Ingredient;
 import me.bakuleva.recipesapp.services.IngredientsServices;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,9 @@ public class IngredientsController {
         this.ingredientsServices = ingredientsServices;
 
     }
+    @ExceptionHandler(InvalidtException.class)
+    public ResponseEntity<String> handleInvalidSockRequestException(InvalidtException invalidSockRequestException){
+        return ResponseEntity.badRequest().body(invalidSockRequestException.getMessage());}
 
    @GetMapping
    @Operation(description = "Получение всех ингредиентов.")

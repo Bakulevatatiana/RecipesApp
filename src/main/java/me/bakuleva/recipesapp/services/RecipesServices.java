@@ -17,4 +17,6 @@ public interface RecipesServices {
     byte [] getAllInBytes();
 
     void importRecipes(MultipartFile recipes);
+
+    byte[] exportTxt();
 }
